@@ -6,8 +6,8 @@ package com.poo.view;
 
 import com.poo.libsbooks.Author;
 import com.poo.sevices.DataBase;
-import java.util.HashSet;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class AuthorView extends javax.swing.JFrame {
     
     private DataBase dataBase;
+    private Author author;
 
     /**
      * Creates new form Author
@@ -230,38 +231,76 @@ public class AuthorView extends javax.swing.JFrame {
     }//GEN-LAST:event_rbFameActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
+        btnDelete.setEnabled(false);
+        enableCreateEdit(true);        
+        
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+        btnSave.setEnabled(false);
+        int response = JOptionPane.showConfirmDialog(null, "Tchê, tens certeza que quer apagar o autor '" + author.getName() + "' mesmo?");
+        if (response == 0) {
+            if (dataBase.deleteAuthor(author)) {
+                cleanData();
+                fillTable(dataBase.getAuthors());
+                JOptionPane.showMessageDialog(null, "Bom, agora já era. Os dados foram apagados!!");
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Opss.. Não rolou. Dados não foram apagados!!");
+            }
+        }
+        enableCreateEdit(false);
+        btnEdit.setEnabled(false);
+        btnDelete.setEnabled(false);
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
         
-        enableCreate(true);
+        btnEdit.setEnabled(false);
+        btnDelete.setEnabled(false);
+        enableCreateEdit(true);
         cleanData();
+        author = new Author();
         
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
-        
-        enableCreate(false);
-        Author author = new Author();
-        author.setName(inputName.getText());
-        author.setGender(rbMale.isSelected());
-        dataBase.createAuthor(author);
-        cleanData();
-        fillTable(dataBase.getAuthors());
-        
+
+            enableCreateEdit(false);
+            btnEdit.setEnabled(false);
+            author.setName(inputName.getText());
+            author.setGender(rbMale.isSelected());
+            if (author.getId() == 0) {
+                dataBase.createAuthor(author);
+            } else {
+                dataBase.updateAuthor(author);
+            }
+            cleanData();
+            fillTable(dataBase.getAuthors());
+            btnEdit.setEnabled(false);
+            btnDelete.setEnabled(false);
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void authorsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_authorsTableMouseClicked
-        // TODO add your handling code here:
+        
+        btnAdd.setEnabled(true);
+        btnEdit.setEnabled(true);
+        btnDelete.setEnabled(true);
+        
+        int id = (int) authorsTable.getValueAt(authorsTable.getSelectedRow(), 0);
+        author = dataBase.searchAuthorById(id);
+        
+        String name = author.getName();        
+        if (author.isGender()) {
+            rbMale.setSelected(true);            
+        } else {
+            rbFame.setSelected(false);
+        }
+        
+        inputName.setText(name);
+        
     }//GEN-LAST:event_authorsTableMouseClicked
-
 
     /**
      * @param args the command line arguments
@@ -315,29 +354,33 @@ public class AuthorView extends javax.swing.JFrame {
     private javax.swing.JRadioButton rbMale;
     // End of variables declaration//GEN-END:variables
 
-    private void fillTable(List<Author> authors){
+    private void fillTable(List<Author> authors) {
+        
         DefaultTableModel model = new DefaultTableModel();
         authorsTable.setModel(model);
         
+        model.addColumn("ID");
         model.addColumn("Nome");
         model.addColumn("Genero");
         authorsTable.getColumnModel().getColumn(0).setPreferredWidth(10);
         
         for (Author author : authors) {
-            model.addRow(new Object[]{author.getName(), author.isGender()==false?"Feminino":"Masculino"});
+            model.addRow(new Object[]{author.getId(), author.getName(), author.isGender() == false ? "Feminino" : "Masculino"});
         }
     }
-
-    public void enableCreate(boolean createStatus) {
+    
+    public void enableCreateEdit(boolean createStatus) {
         inputName.setEnabled(createStatus);
         rbFame.setEnabled(createStatus);
         rbMale.setEnabled(createStatus);
         btnSave.setEnabled(createStatus);
         btnAdd.setEnabled(!createStatus);
+
     }
     
-    public void cleanData(){
+    public void cleanData() {
         inputName.setText("");
         rbMale.setSelected(true);
+        author = new Author();
     }
 }
