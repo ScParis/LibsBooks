@@ -26,7 +26,7 @@ public class AuthorView extends javax.swing.JFrame {
     public AuthorView() {
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Autor");
+        setTitle("Livraria Paris - Autor");
         dataBase = new DataBase();
         dataBase.insertAuthors();
         fillTable(dataBase.getAuthors());
@@ -42,38 +42,24 @@ public class AuthorView extends javax.swing.JFrame {
     private void initComponents() {
 
         pageArea = new javax.swing.JPanel();
-        authorsTableArea = new javax.swing.JScrollPane();
-        authorsTable = new javax.swing.JTable();
         inputName = new javax.swing.JTextField();
         genderLabel = new javax.swing.JLabel();
         rbMale = new javax.swing.JRadioButton();
         rbFame = new javax.swing.JRadioButton();
         labelAuthorName = new javax.swing.JLabel();
+        authorsTableArea = new javax.swing.JScrollPane();
+        authorsTable = new javax.swing.JTable();
         authorsButtonsArea = new javax.swing.JPanel();
         btnAdd = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(1, 66, 119));
 
-        authorsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        authorsTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                authorsTableMouseClicked(evt);
-            }
-        });
-        authorsTableArea.setViewportView(authorsTable);
+        pageArea.setBackground(new java.awt.Color(171, 171, 171));
 
         inputName.setText("Informe o nome do autor");
         inputName.setEnabled(false);
@@ -100,10 +86,62 @@ public class AuthorView extends javax.swing.JFrame {
         labelAuthorName.setFont(new java.awt.Font("Ubuntu", 1, 13)); // NOI18N
         labelAuthorName.setText("Nome:");
 
-        authorsButtonsArea.setBackground(new java.awt.Color(123, 123, 123));
+        javax.swing.GroupLayout pageAreaLayout = new javax.swing.GroupLayout(pageArea);
+        pageArea.setLayout(pageAreaLayout);
+        pageAreaLayout.setHorizontalGroup(
+            pageAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pageAreaLayout.createSequentialGroup()
+                .addGroup(pageAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelAuthorName)
+                    .addComponent(genderLabel))
+                .addGap(37, 37, 37)
+                .addGroup(pageAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pageAreaLayout.createSequentialGroup()
+                        .addComponent(rbMale)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbFame)
+                        .addContainerGap(893, Short.MAX_VALUE))
+                    .addComponent(inputName)))
+        );
+        pageAreaLayout.setVerticalGroup(
+            pageAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pageAreaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pageAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inputName)
+                    .addComponent(labelAuthorName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pageAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbMale)
+                    .addComponent(genderLabel)
+                    .addComponent(rbFame))
+                .addGap(44, 44, 44))
+        );
+
+        authorsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        authorsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                authorsTableMouseClicked(evt);
+            }
+        });
+        authorsTableArea.setViewportView(authorsTable);
+
+        authorsButtonsArea.setBackground(new java.awt.Color(40, 179, 246));
         authorsButtonsArea.setAutoscrolls(true);
 
         btnAdd.setText("Cadastrar");
+        btnAdd.setAlignmentY(0.0F);
+        btnAdd.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
@@ -111,7 +149,12 @@ public class AuthorView extends javax.swing.JFrame {
         });
 
         btnEdit.setText("Editar");
+        btnEdit.setAlignmentY(0.0F);
+        btnEdit.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEdit.setEnabled(false);
+        btnEdit.setMaximumSize(new java.awt.Dimension(82, 32));
+        btnEdit.setMinimumSize(new java.awt.Dimension(82, 32));
+        btnEdit.setPreferredSize(new java.awt.Dimension(82, 32));
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditActionPerformed(evt);
@@ -119,7 +162,10 @@ public class AuthorView extends javax.swing.JFrame {
         });
 
         btnSave.setText("Salvar");
+        btnSave.setAlignmentY(0.0F);
+        btnSave.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnSave.setEnabled(false);
+        btnSave.setPreferredSize(new java.awt.Dimension(82, 32));
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
@@ -127,10 +173,20 @@ public class AuthorView extends javax.swing.JFrame {
         });
 
         btnDelete.setText("Apagar");
+        btnDelete.setAlignmentY(0.0F);
+        btnDelete.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDelete.setEnabled(false);
+        btnDelete.setPreferredSize(new java.awt.Dimension(82, 32));
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnCancel.setText("Cancelar");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
             }
         });
 
@@ -142,11 +198,13 @@ public class AuthorView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btnAdd)
                 .addGap(34, 34, 34)
-                .addComponent(btnEdit)
+                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
-                .addComponent(btnSave)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
-                .addComponent(btnDelete)
+                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(btnCancel)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         authorsButtonsAreaLayout.setVerticalGroup(
@@ -155,51 +213,11 @@ public class AuthorView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(authorsButtonsAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAdd)
-                    .addComponent(btnEdit)
-                    .addComponent(btnSave)
-                    .addComponent(btnDelete))
+                    .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout pageAreaLayout = new javax.swing.GroupLayout(pageArea);
-        pageArea.setLayout(pageAreaLayout);
-        pageAreaLayout.setHorizontalGroup(
-            pageAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(authorsTableArea, javax.swing.GroupLayout.DEFAULT_SIZE, 828, Short.MAX_VALUE)
-            .addGroup(pageAreaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pageAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pageAreaLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(labelAuthorName))
-                    .addComponent(genderLabel))
-                .addGap(24, 24, 24)
-                .addGroup(pageAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pageAreaLayout.createSequentialGroup()
-                        .addComponent(rbMale)
-                        .addGap(18, 18, 18)
-                        .addComponent(rbFame)
-                        .addContainerGap())
-                    .addComponent(inputName)))
-            .addComponent(authorsButtonsArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        pageAreaLayout.setVerticalGroup(
-            pageAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pageAreaLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pageAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inputName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelAuthorName))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pageAreaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbMale)
-                    .addComponent(genderLabel)
-                    .addComponent(rbFame))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
-                .addComponent(authorsButtonsArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(authorsTableArea, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -208,7 +226,10 @@ public class AuthorView extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pageArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pageArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(authorsTableArea, javax.swing.GroupLayout.DEFAULT_SIZE, 1161, Short.MAX_VALUE)
+                    .addComponent(authorsButtonsArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -216,6 +237,10 @@ public class AuthorView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pageArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(authorsTableArea, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addComponent(authorsButtonsArea, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -267,19 +292,19 @@ public class AuthorView extends javax.swing.JFrame {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
 
-            enableCreateEdit(false);
-            btnEdit.setEnabled(false);
-            author.setName(inputName.getText());
-            author.setGender(rbMale.isSelected());
-            if (author.getId() == 0) {
-                dataBase.createAuthor(author);
-            } else {
-                dataBase.updateAuthor(author);
-            }
-            cleanData();
-            fillTable(dataBase.getAuthors());
-            btnEdit.setEnabled(false);
-            btnDelete.setEnabled(false);
+        enableCreateEdit(false);
+        btnEdit.setEnabled(false);
+        author.setName(inputName.getText());
+        author.setGender(rbMale.isSelected());
+        if (author.getId() == 0) {
+            dataBase.createAuthor(author);
+        } else {
+            dataBase.updateAuthor(author);
+        }
+        cleanData();
+        fillTable(dataBase.getAuthors());
+        btnEdit.setEnabled(false);
+        btnDelete.setEnabled(false);
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void authorsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_authorsTableMouseClicked
@@ -301,6 +326,11 @@ public class AuthorView extends javax.swing.JFrame {
         inputName.setText(name);
         
     }//GEN-LAST:event_authorsTableMouseClicked
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // Try to make this action functional
+        
+    }//GEN-LAST:event_btnCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -343,6 +373,7 @@ public class AuthorView extends javax.swing.JFrame {
     private javax.swing.JTable authorsTable;
     private javax.swing.JScrollPane authorsTableArea;
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnSave;

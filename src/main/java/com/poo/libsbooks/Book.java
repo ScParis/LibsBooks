@@ -10,11 +10,21 @@ package com.poo.libsbooks;
  */
 public class Book {
     
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
     private String title;
     private int edition;
     private int publishingDate;
     private String serialNumber;
-    private Author autor;
+    private Author author;
     private PublishingCompany publishingCompany;
 
     public String getTitle() {
@@ -49,12 +59,12 @@ public class Book {
         this.serialNumber = serialNumber;
     }
 
-    public Author getAutor() {
-        return autor;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setAutor(Author autor) {
-        this.autor = autor;
+    public void setAuthor(Author autor) {
+        this.author = autor;
     }
 
     public PublishingCompany getPublishingCompany() {
@@ -64,6 +74,32 @@ public class Book {
     public void setPublishingCompany(PublishingCompany publishingCompany) {
         this.publishingCompany = publishingCompany;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + this.id;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Book other = (Book) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
 }
