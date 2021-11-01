@@ -406,6 +406,7 @@ public class AuthorView extends javax.swing.JFrame {
         rbMale.setEnabled(createStatus);
         btnSave.setEnabled(createStatus);
         btnAdd.setEnabled(!createStatus);
+        btnEdit.setEnabled(createStatus);
 
     }
     
