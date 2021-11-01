@@ -102,6 +102,70 @@ public class DataBase {
         this.authors = authors;
     }
     
+        /* Books data base  */
+    
+    public void insertBook(){
+        
+        Book book = new Book();
+        
+        book.setId(1);
+        book.setTitle("Livro 1");
+//        book.setAuthor(searchAuthor(1));
+        books.add(book);
+        
+        
+        book = new Book();
+        book.setId(2);
+        book.setTitle("Livro 2");
+//        book.setAuthor(authors.get(1));
+        books.add(book);
+        
+        book = new Book();
+        book.setId(3);
+        book.setTitle("Livro 3");
+//        book.setAuthor(authors.get(1));
+        books.add(book);
+    }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
     
     
+    /* Publisher Company data base */
+    
+    public void insertPublishers(){
+
+        PublishingCompany publishingCompany = new PublishingCompany();
+
+        publishingCompany.setId(1);
+        publishingCompany.setName("Company to Publishing Books");
+        publishers.add(publishingCompany);
+
+
+        publishingCompany = new PublishingCompany();
+        publishingCompany.setId(2);
+        publishingCompany.setName("Company to Publishing Books the books");
+        publishers.add(publishingCompany);
+
+        publishingCompany = new PublishingCompany();
+        publishingCompany.setId(2);
+        publishingCompany.setName("Company to Publishing Books the book books");
+        publishers.add(publishingCompany);
+
+    }
+
+    public List<PublishingCompany> getPublishers() {
+        return publishers;
+    }
+
+    public void setPublishers(List<PublishingCompany> publishers) {
+        this.publishers = publishers;
+    }
+        
+        
 }
